@@ -28,7 +28,7 @@ body {
       .rating-stars {
         svg {
           path {
-            transition: fill 1s ease-in-out;
+            transition: fill 0.1s ease-in-out;
           }
         }
 
@@ -79,7 +79,10 @@ body {
       font-size: 44px;
     }
 
-    a,
+    a {
+      text-decoration: none;
+    }
+
     button {
       cursor: pointer;
       background: #ffffff;

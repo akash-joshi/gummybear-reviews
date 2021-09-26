@@ -13,7 +13,7 @@ export default function AddRevew() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (rating < 1) {
+    if (rating < 0.5) {
       return alert("Please add a rating.");
     }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import HalfStar from "./HalfStar";
+import { Link } from "react-router-dom";
 
 import StarRatings from "./StarRatings";
 
@@ -60,11 +60,11 @@ export default function Home() {
                   rating={averageRating}
                   className="avg-rating-stars"
                 />
-
-                <HalfStar />
               </div>
 
-              <a href="/addreview">Add Review</a>
+              <Link to="/addreview">
+                <button>Add Review</button>
+              </Link>
             </div>
 
             <div className="divider" />
@@ -77,7 +77,7 @@ export default function Home() {
                   {ratings.map(({ rating, reviewText }, index) => (
                     <div key={index} className="star-rating-row">
                       <StarRatings
-                        rating={Math.round(rating)}
+                        rating={rating}
                         className={"rating-stars"}
                       />
 

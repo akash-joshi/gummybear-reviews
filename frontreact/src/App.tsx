@@ -1,7 +1,8 @@
 import React from "react";
 import "./index.scss";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// why I'm using hashrouter: https://github.com/remix-run/react-router/blob/main/FAQ.md#why-doesnt-my-application-render-after-refreshing
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import AddReview from "./components/AddReview";
@@ -13,7 +14,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/addreview">
+        <Route path="/addreview">
           <AddReview />
         </Route>
       </Switch>
