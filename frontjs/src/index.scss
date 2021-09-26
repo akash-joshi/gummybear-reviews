@@ -34,11 +34,10 @@ body {
           }
         }
 
-        svg {
+        svg.hover {
           path {
-            &:hover {
               fill: rgba(253, 206, 113, 0.7);
-            }
+            
           }
         }
       }

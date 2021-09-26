@@ -1,3 +1,5 @@
 frontjs/.parcel-cache
 frontjs/dist
 frontjs/node_modules
+
+backend/node_modules

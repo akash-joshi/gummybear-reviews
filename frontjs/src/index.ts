@@ -3,7 +3,7 @@ import getStarRatingRow from "./getStarRatingRow";
 const initAverageRating = (avgRating) => {
   if (avgRating === 0) {
     document.querySelector(".avg-rating").classList.add("medium-text");
-    document.querySelector(".avg-rating").innerHTML = "No Ratings Added Yet.";
+    document.querySelector(".avg-rating").innerHTML = "No Reviews Added Yet.";
     document.querySelector(".avg-rating-stars").classList.add("display-none");
   } else {
     const starRating = Math.round(avgRating);
@@ -26,26 +26,29 @@ const initAverageRating = (avgRating) => {
   document.querySelector(".loading").classList.add("display-none");
 };
 
-const ratings = [
-  { rating: 1.8, reviewText: "It was okay" },
-  { rating: 2.1, reviewText: "Pretty Good" },
-];
+const main = async () => {
+  const ratings = await fetch("http://localhost:3000/data").then((response) =>
+    response.json()
+  );
 
-const averageRating =
-  ratings.length > 0
-    ? (
-        ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length
-      ).toFixed(1)
-    : 0;
+  const averageRating =
+    ratings.length > 0
+      ? (
+          ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length
+        ).toFixed(1)
+      : 0;
 
-const ratingsList = ratings
-  .map(({ rating, reviewText }) => getStarRatingRow(rating, reviewText))
-  .join("");
+  const ratingsList = ratings
+    .map(({ rating, reviewText }) => getStarRatingRow(rating, reviewText))
+    .join("");
 
-initAverageRating(averageRating);
-if (ratings.length > 0) {
-  document.querySelector(".star-rating-list").innerHTML = ratingsList;
-  document
-    .querySelector(".ratings-list-container")
-    .classList.remove("display-none");
-}
+  initAverageRating(averageRating);
+  if (ratings.length > 0) {
+    document.querySelector(".star-rating-list").innerHTML = ratingsList;
+    document
+      .querySelector(".ratings-list-container")
+      .classList.remove("display-none");
+  }
+};
+
+main();
