@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+
 import StarRatings from "./StarRatings";
 
 type RatingObject = {
@@ -17,9 +19,6 @@ export default function Home() {
     ).then((response) => response.json());
 
     if (ratings.length > 0) {
-      setAverageRating(
-        ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length
-      );
       setRatings(ratings);
     }
 
@@ -27,6 +26,20 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (ratings.length > 0) {
+      setAverageRating(
+        ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length
+      );
+    }
+  }, [ratings]);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3001");
+
+    socket.on("new rating", (msg) => {
+      setRatings((ratings) => [...ratings, msg]);
+    });
+
     fetchRatings();
   }, []);
 

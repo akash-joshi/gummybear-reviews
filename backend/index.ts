@@ -5,9 +5,13 @@ const cors = require("cors");
 
 import { Server } from "socket.io";
 
-const http = require("http").Server(app);
+const http = require("http");
 
-const io = new Server(http);
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: { origin: "*", methods: ["GET", "POST"] },
+});
 
 import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig";
@@ -67,6 +71,6 @@ io.on("connection", (socket) => {
 
 const PORT = 3001;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`The application is listening on port ${PORT}!`);
 });
