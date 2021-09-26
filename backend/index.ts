@@ -56,7 +56,7 @@ app.post("/data", (req, res) => {
   } catch (error) {
     console.error(error);
   }
-  ratings.push(body);
+  ratings.unshift(body);
 
   db.push("/ratings", ratings);
 
@@ -66,7 +66,7 @@ app.post("/data", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("client connected");
 });
 
 const PORT = 3001;

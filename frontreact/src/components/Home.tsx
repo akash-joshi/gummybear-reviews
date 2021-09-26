@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import HalfStar from "./HalfStar";
 
 import StarRatings from "./StarRatings";
 
@@ -56,9 +57,11 @@ export default function Home() {
               <div>
                 <span className="avg-rating">{averageRating.toFixed(1)}</span>
                 <StarRatings
-                  rating={Math.round(averageRating)}
+                  rating={averageRating}
                   className="avg-rating-stars"
                 />
+
+                <HalfStar />
               </div>
 
               <a href="/addreview">Add Review</a>

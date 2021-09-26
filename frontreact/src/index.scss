@@ -26,6 +26,12 @@ body {
       }
 
       .rating-stars {
+        svg {
+          path {
+            transition: fill 1s ease-in-out;
+          }
+        }
+
         &:hover {
           svg {
             path {
@@ -34,9 +40,17 @@ body {
           }
         }
 
-        svg.hover {
-          path {
-            fill: rgba(253, 206, 113, 0.7);
+        svg {
+          &.hover {
+            path {
+              fill: rgba(253, 206, 113, 0.7);
+            }
+          }
+
+          &.hover-left {
+            path {
+              fill: url(#paint0_half_hover);
+            }
           }
         }
       }
