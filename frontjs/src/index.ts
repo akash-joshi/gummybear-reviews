@@ -1,7 +1,5 @@
 import getStarRatingRow from "./getStarRatingRow";
 
-console.log("hello world");
-
 const initAverageRating = (avgRating) => {
   if (avgRating === 0) {
     document.querySelector(".avg-rating").classList.add("medium-text");
@@ -35,7 +33,9 @@ const ratings = [
 
 const averageRating =
   ratings.length > 0
-    ? (ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length).toFixed(1)
+    ? (
+        ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length
+      ).toFixed(1)
     : 0;
 
 const ratingsList = ratings
@@ -49,5 +49,3 @@ if (ratings.length > 0) {
     .querySelector(".ratings-list-container")
     .classList.remove("display-none");
 }
-
-// fill #FDCE71
