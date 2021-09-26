@@ -5,16 +5,18 @@ body {
     max-width: 600px;
     margin: 0 auto;
 
+    .medium-text {
+      font-size: 24px;
+    }
+
     .divider {
       margin-top: 40px;
       width: 100%;
       height: 1px;
-      border-top: 2px solid #B9B9B9;
+      border-top: 2px solid #b9b9b9;
     }
 
     svg {
-      width: 28px;
-
       &.active {
         path {
           fill: #fdce71;
@@ -30,8 +32,13 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: max-content;
 
-      button {
+      svg {
+        width: 28px;
+      }
+
+      a {
         background: #ffffff;
 
         /* CCCCCC */
@@ -57,11 +64,39 @@ body {
 
         /* 797874 */
         color: #797874;
+        text-decoration: none;
       }
 
       .avg-rating {
         font-size: 44px;
         margin-right: 24px;
+
+        &.medium-text {
+          font-size: 24px;
+        }
+      }
+    }
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    .star-rating-row {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      margin-bottom: 30px;
+
+      .rating-stars {
+        margin-right: 24px;
+
+        svg {
+          margin-right: 3px;
+        }
+      }
+
+      .review-text {
+        color: #929292;
       }
     }
   }

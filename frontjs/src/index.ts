@@ -1,23 +1,53 @@
+import getStarRatingRow from "./getStarRatingRow";
+
 console.log("hello world");
 
 const initAverageRating = (avgRating) => {
-  const starRating = Math.ceil(avgRating);
+  if (avgRating === 0) {
+    document.querySelector(".avg-rating").classList.add("medium-text");
+    document.querySelector(".avg-rating").innerHTML = "No Ratings Added Yet.";
+    document.querySelector(".avg-rating-stars").classList.add("display-none");
+  } else {
+    const starRating = Math.round(avgRating);
 
-  document.querySelector(".avg-rating").innerHTML = avgRating;
-  document.querySelector(".avg-rating-stars").setAttribute("title", avgRating);
+    document.querySelector(".avg-rating").innerHTML = avgRating;
+    document
+      .querySelector(".avg-rating-stars")
+      .setAttribute("title", avgRating);
 
-  const stars = document.querySelectorAll(".avg-rating-stars svg");
+    const stars = document.querySelectorAll(".avg-rating-stars svg");
 
-  for (let index = 0; index < starRating; index++) {
-    const star = stars[index];
+    for (let index = 0; index < starRating; index++) {
+      const star = stars[index];
 
-    star.classList.add("active");
+      star.classList.add("active");
+    }
   }
 
   document.querySelector(".main-content").classList.remove("display-none");
   document.querySelector(".loading").classList.add("display-none");
 };
 
-initAverageRating(2.8);
+const ratings = [
+  { rating: 1.8, reviewText: "It was okay" },
+  { rating: 2.1, reviewText: "Pretty Good" },
+];
+
+const averageRating =
+  ratings.length > 0
+    ? (ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length).toFixed(1)
+    : 0;
+
+const ratingsList = ratings
+  .map(({ rating, reviewText }) => getStarRatingRow(rating, reviewText))
+  .join("");
+
+initAverageRating(averageRating);
+if (ratings.length > 0) {
+  document.querySelector(".star-rating-list").innerHTML = ratingsList;
+  document
+    .querySelector(".ratings-list-container")
+    .classList.remove("display-none");
+}
 
 // fill #FDCE71
