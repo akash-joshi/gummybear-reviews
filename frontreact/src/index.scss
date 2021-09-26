@@ -1,0 +1,165 @@
+body {
+  font-family: "Roboto", sans-serif;
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+
+    form {
+      font-size: 24px;
+
+      div {
+        margin-bottom: 40px;
+      }
+
+      input {
+        border: 0px;
+        font-size: 20px;
+        width: 100%;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus,
+      button:focus {
+        outline: none;
+      }
+
+      .rating-stars {
+        &:hover {
+          svg {
+            path {
+              fill: rgba(253, 206, 113, 0.4);
+            }
+          }
+        }
+
+        svg.hover {
+          path {
+            fill: rgba(253, 206, 113, 0.7);
+          }
+        }
+      }
+    }
+
+    .medium-text {
+      font-size: 24px;
+    }
+
+    .divider {
+      margin-top: 40px;
+      width: 100%;
+      height: 1px;
+      border-top: 2px solid #b9b9b9;
+    }
+
+    svg {
+      &.active {
+        path {
+          fill: #fdce71;
+        }
+      }
+    }
+
+    h1 {
+      font-size: 44px;
+    }
+
+    a,
+    button {
+      cursor: pointer;
+      background: #ffffff;
+
+      /* CCCCCC */
+      border: 1px solid #cccccc;
+      box-sizing: border-box;
+
+      /* shadow-3 */
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+
+      font-style: normal;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 21px;
+
+      /* identical to box height */
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      height: max-content;
+      padding: 0.5em 1em;
+
+      /* 797874 */
+      color: #797874;
+      text-decoration: none;
+    }
+
+    .rating-stars {
+      svg {
+        margin-right: 5px;
+      }
+    }
+
+    .avg-ratings-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: max-content;
+
+      svg {
+        width: 28px;
+        margin-left: 4px;
+      }
+
+      .avg-rating {
+        font-size: 44px;
+        margin-right: 24px;
+
+        &.medium-text {
+          font-size: 24px;
+        }
+      }
+    }
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    .star-rating-row {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      margin-bottom: 30px;
+
+      .rating-stars {
+        margin-right: 24px;
+
+        svg {
+          margin-right: 3px;
+        }
+      }
+
+      .review-text {
+        color: #929292;
+      }
+    }
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .loading {
+    text-align: center;
+    color: #acacac;
+    animation: blinker 2s linear infinite;
+  }
+}

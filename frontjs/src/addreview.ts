@@ -2,6 +2,11 @@ let rating = 0;
 
 const stars = document.querySelectorAll("svg");
 
+type RatingObject = {
+  rating: number;
+  reviewText: string;
+};
+
 const highlightStars = (starRating) => {
   for (let index = 0; index < 5; index++) {
     const star = stars[index];
@@ -21,13 +26,13 @@ for (let index = 0; index < 5; index++) {
   });
 
   star.addEventListener("mouseenter", () => {
-    for (let starIndex = 0; starIndex <= index; starIndex++) {
-      stars[starIndex].classList.add("hover");
+    for (let starIndex = 0; starIndex < stars.length; starIndex++) {
+      if (starIndex <= index) {
+        stars[starIndex].classList.add("hover");
+      } else {
+        stars[starIndex].classList.remove("hover");
+      }
     }
-  });
-
-  star.addEventListener("mouseleave", () => {
-    star.classList.remove("hover");
   });
 }
 
@@ -46,17 +51,16 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
   const reviewText = document.querySelector("input").value;
 
-  type PostData = {
-    rating: number;
-    reviewText: string;
-  };
+  if (!reviewText.trim()) {
+    return alert("Please add review text.");
+  }
 
-  const postData: PostData = {
+  const postData: RatingObject = {
     rating,
     reviewText,
   };
 
-  await fetch("http://localhost:3000/data", {
+  await fetch("http://localhost:3001/data", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

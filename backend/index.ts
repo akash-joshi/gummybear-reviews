@@ -1,17 +1,23 @@
 import express from "express";
 
 const app = express();
-var cors = require("cors");
+const cors = require("cors");
+
+import { Server } from "socket.io";
+
+const http = require("http").Server(app);
+
+const io = new Server(http);
 
 import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig";
 
-// The first argument is the database filename. If no extension, '.json' is assumed and automatically added.
-// The second argument is used to tell the DB to save after each push
-// If you put false, you'll have to call the save() method.
-// The third argument is to ask JsonDB to save the database in an human readable format. (default false)
-// The last argument is the separator. By default it's slash (/)
-var db = new JsonDB(new Config("myDataBase", true, false, "/"));
+type RatingObject = {
+  rating: number;
+  reviewText: string;
+};
+
+const db = new JsonDB(new Config("myDataBase", true, false, "/"));
 
 app.use(express.json());
 
@@ -33,6 +39,12 @@ app.get("/data", async (req, res) => {
 });
 
 app.post("/data", (req, res) => {
+  const { body } = req as any;
+
+  if (!body.rating || !body.reviewText) {
+    res.sendStatus(401);
+  }
+
   let ratings = [];
 
   try {
@@ -40,13 +52,21 @@ app.post("/data", (req, res) => {
   } catch (error) {
     console.error(error);
   }
-  ratings.push(req.body);
+  ratings.push(body);
 
   db.push("/ratings", ratings);
 
-  res.send(req.body);
+  io.emit("new rating", body);
+
+  res.send(body);
 });
 
-app.listen(3000, () => {
-  console.log("The application is listening on port 3000!");
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
+
+const PORT = 3001;
+
+app.listen(PORT, () => {
+  console.log(`The application is listening on port ${PORT}!`);
 });
