@@ -5,6 +5,16 @@ body {
     max-width: 600px;
     margin: 0 auto;
 
+    svg {
+      width: 28px;
+
+      &.active {
+        path {
+          fill: #fdce71;
+        }
+      }
+    }
+
     h1 {
       font-size: 44px;
     }
@@ -12,6 +22,7 @@ body {
     .avg-ratings-line {
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       button {
         background: #ffffff;
@@ -43,7 +54,24 @@ body {
 
       .avg-rating {
         font-size: 44px;
+        margin-right: 24px;
       }
     }
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .loading {
+    text-align: center;
+    color: #acacac;
+    animation: blinker 2s linear infinite;
   }
 }
