@@ -16,7 +16,7 @@ export default function Home() {
 
   const fetchRatings = async () => {
     const ratings: Array<RatingObject> = await fetch(
-      "http://localhost:3001/data"
+      "http://159.89.4.76:3001/data"
     ).then((response) => response.json());
 
     if (ratings.length > 0) {
@@ -35,7 +35,7 @@ export default function Home() {
   }, [ratings]);
 
   useEffect(() => {
-    const socket = io("http://localhost:3001");
+    const socket = io("http://159.89.4.76:3001");
 
     socket.on("new rating", (msg) => {
       setRatings((ratings) => [...ratings, msg]);

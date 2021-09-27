@@ -27,7 +27,7 @@ const initAverageRating = (avgRating) => {
 };
 
 const main = async () => {
-  const ratings = await fetch("http://localhost:3001/data").then((response) =>
+  const ratings = await fetch("http://159.89.4.76/data").then((response) =>
     response.json()
   );
 

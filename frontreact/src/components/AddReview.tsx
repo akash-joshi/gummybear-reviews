@@ -26,7 +26,7 @@ export default function AddRevew() {
       reviewText,
     };
 
-    await fetch("http://localhost:3001/data", {
+    await fetch("http://159.89.4.76:3001/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
