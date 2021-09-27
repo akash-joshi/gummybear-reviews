@@ -38,7 +38,7 @@ export default function Home() {
     const socket = io("http://159.89.4.76:3001");
 
     socket.on("new rating", (msg) => {
-      setRatings((ratings) => [...ratings, msg]);
+      setRatings((ratings) => [msg, ...ratings]);
     });
 
     fetchRatings();
@@ -76,10 +76,7 @@ export default function Home() {
                 <div className="star-rating-list">
                   {ratings.map(({ rating, reviewText }, index) => (
                     <div key={index} className="star-rating-row">
-                      <StarRatings
-                        rating={rating}
-                        className={"rating-stars"}
-                      />
+                      <StarRatings rating={rating} className={"rating-stars"} />
 
                       <b>{rating}</b>
                       <span className="review-text">, {reviewText}</span>
